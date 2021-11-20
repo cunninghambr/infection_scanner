@@ -12,7 +12,7 @@ $| = 1;
 
 my $USERPATH = $cpanel->cpanelprint('$homedir');
 print "Content-type: text/html\r\n\r\n";
-print $cpanel->header('Simple Infection Scanner!');
+print $cpanel->header('Scanner de infecção simples !');
 print <<END;
 <!DOCTYPE html>
 <html>
@@ -46,7 +46,7 @@ on your website or any other websites.
 <hr>
 END
 
-print "Now scanning $USERPATH...<P>\n";
+print "Verificando arquivos agora $USERPATH...<P>\n";
 #require '/usr/local/cpanel/base/frontend/paper_lantern/infection_scanner/infections.txt';
 my $URL="https://raw.githubusercontent.com/cPanelPeter/infection_scanner/master/strings.txt";
 my @DEFINITIONS = qx[ curl -s $URL ];
@@ -64,7 +64,7 @@ foreach $SEARCHSTRING(@SEARCHSTRING) {
    if($SCAN) {
       $cntFound++;
       $SOMETHING_FOUND=1;
-      push(@FOUND,"<font color=GREEN>The phrase</font> <font color=RED>$SEARCHSTRING</font> <font color=GREEN>was found in file</font> <font color=BLUE>$SCAN</font>");
+      push(@FOUND,"<font color=GREEN>A sintaxe</font> <font color=RED>$SEARCHSTRING</font> <font color=GREEN>foi encontrado no arquivo</font> <font color=BLUE>$SCAN</font>");
    }
 # UNCOMMENT THIS NEXT LINE TO PUT A .10 SECOND PAUSE (for drammatic effect).
 #       select(undef, undef, undef, 0.10);
@@ -72,7 +72,7 @@ foreach $SEARCHSTRING(@SEARCHSTRING) {
 if ($SOMETHING_FOUND > 0) {
    my $found;
    my $FoundCnt = @FOUND;
-   print "<p>Results: $FountCnt possible infections found.<p>\n";
+   print "<p>Resultado: $FountCnt possíveis infecções encontradas.<p>\n";
    foreach $found(@FOUND) {
       chomp($found);
       $found =~ s/\\//g;
@@ -80,12 +80,12 @@ if ($SOMETHING_FOUND > 0) {
    }
 }
 else { 
-	print "<p>Congratulations!  Nothing suspicious was found!\n";
+	print "<p>Parabéns! Nada suspeito foi encontrado!\n";
 }
 
 print <<END;
 <p>
-Please note that these are "possible" infections and could very well be false positives. Each file should be carefully examined for security issues. YOU SHOULD NOT BLINDLY DELETE A FILE!
+Observe que essas são infecções "possíveis" e podem muito bem ser falsos positivos. Cada arquivo deve ser examinado cuidadosamente quanto a problemas de segurança. VOCÊ NÃO DEVE EXCLUIR CEGAS UM ARQUIVO!
 <p>
 <a href="../index.html">Home</a>
 END
